@@ -70,21 +70,22 @@ public class SaleViewController {
             updateLabels();
         }
 
-
-        //Listener that will show the purchases made by the customer when the customer is selected
-        tableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, customerSelected) ->
-        {
-            listView.getItems().clear();
-            List<Product> courses = customerSelected.getPurchases();
-            listView.getItems().addAll(courses);
+        // Listener that will show the purchases made by the customer when the customer is selected
+        tableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, customerSelected) -> {
+            if (customerSelected != null) {
+                listView.getItems().clear();
+                List<Product> courses = customerSelected.getPurchases();
+                listView.getItems().addAll(courses);
+            }
         });
 
-
-        //Updating the image view and labels when the product is selected from the list view
+        // Updating the image view and labels when the product is selected from the list view
         tableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, productSelected) -> {
-            listView.getItems().clear();
-            List<Product> products = productSelected.getPurchases();
-            listView.getItems().addAll(products);
+            if (productSelected != null) {
+                listView.getItems().clear();
+                List<Product> products = productSelected.getPurchases();
+                listView.getItems().addAll(products);
+            }
         });
 
         listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedProduct) -> {
@@ -96,22 +97,18 @@ public class SaleViewController {
         });
     }
 
+    //Use to update the price of the labels
     private void updatePriceLabels(Product selectedProduct) {
         retailPriceLabel.setText("MSRP: $" + selectedProduct.getRegularPrice());
         salePriceLabel.setText("Sale Price: $" + selectedProduct.getSalePrice());
         savingsLabel.setText("Savings: $" + (selectedProduct.getRegularPrice() - selectedProduct.getSalePrice()));
     }
 
+    //Loading image from the URL and set it to the imageView
     private void updateImageView(Product selectedProduct) {
-        //Loading image from the URL and set it to the imageView
         Image image = new Image(selectedProduct.getImage());
         imageView.setImage(image);
     }
-
-
-
-
-
 
     private void updateLabels()
     {
@@ -127,7 +124,8 @@ public class SaleViewController {
 
     @FXML
     void savedMoneyButton(ActionEvent event) {
-        if (tableView.getSelectionModel().getSelectedItem() != null) {
+        Customer selectedCustomer = tableView.getSelectionModel().getSelectedItem();
+        if (selectedCustomer != null) {
             List<Customer> savedCustomers = customers.stream()
                     .filter(customer -> customer.getSavings() >= 5.0)
                     .toList();

@@ -61,17 +61,17 @@
                   <Insets bottom="90.0" />
                </VBox.margin>
             </ImageView>
-            <Label fx:id="retailPriceLabel" text="MSRP: $3.00">
+            <Label fx:id="retailPriceLabel">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="salePriceLabel" text="Sale Price: $2.00">
+            <Label fx:id="salePriceLabel">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="savingsLabel" text="Savings: $1.00" />
+            <Label fx:id="savingsLabel" />
          </children>
       </VBox>
    </children>

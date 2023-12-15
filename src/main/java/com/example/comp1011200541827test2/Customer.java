@@ -37,12 +37,23 @@ public class Customer {
                 customerId, firstName, lastName, city, purchases);
     }
 
+    //Method to calculate the sum of all products purchased by a customer
     public double getPurchaseValue() {
         if (purchases != null) {
             return purchases.stream()
                     .mapToDouble(purchase -> purchase.getSalePrice())
                     .sum();
         }
-        return 0.0; // or any default value you prefer if there are no purchases
+        return 0.0; //default value
+    }
+
+    //Method to calculate how much a customer saved on all purchases
+    public double getSavings() {
+        if (purchases != null) {
+            return purchases.stream()
+                    .mapToDouble(purchase -> purchase.getRegularPrice() - purchase.getSalePrice())
+                    .sum();
+        }
+        return 0.0; //default value
     }
 }

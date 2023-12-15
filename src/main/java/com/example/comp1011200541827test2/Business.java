@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Buisness {
+public class Business {
     @SerializedName("BusinessName")
     private String businessName;
     @SerializedName("Customers")

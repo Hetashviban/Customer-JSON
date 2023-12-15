@@ -12,7 +12,7 @@ public class Customer {
     private String city;
     private List<Purchase> purchases;
 
-    public int getId() {
+    public int getCustomerId() {
         return customerId;
     }
 
@@ -38,14 +38,22 @@ public class Customer {
     }
 
     //Method to calculate the sum of all products purchased by a customer
+    public String getFormattedPurchaseValue() {
+        double purchaseValue = getPurchaseValue();
+        return String.format("$%.2f", purchaseValue);
+    }
+
     public double getPurchaseValue() {
         if (purchases != null) {
             return purchases.stream()
                     .mapToDouble(purchase -> purchase.getSalePrice())
                     .sum();
         }
-        return 0.0; //default value
+        return 0.0; // default value
     }
+
+
+
 
     //Method to calculate how much a customer saved on all purchases
     public double getSavings() {

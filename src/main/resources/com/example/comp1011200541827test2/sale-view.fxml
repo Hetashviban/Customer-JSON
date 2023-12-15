@@ -22,7 +22,7 @@
       </Label>
       <VBox layoutX="48.0" layoutY="76.0">
          <children>
-            <TableView prefHeight="263.0" prefWidth="445.0">
+            <TableView fx:id="tableView" prefHeight="263.0" prefWidth="445.0">
               <columns>
                 <TableColumn fx:id="idColumn" prefWidth="64.66666030883789" text="ID" />
                 <TableColumn fx:id="firstNameColumn" prefWidth="101.33336639404297" text="First Name" />
@@ -37,7 +37,7 @@
       <VBox layoutX="53.0" layoutY="387.0">
          <children>
             <Label text="Customer Purchases" />
-            <ListView prefHeight="186.0" prefWidth="444.0" />
+            <ListView fx:id="listView" prefHeight="186.0" prefWidth="444.0" />
          </children>
       </VBox>
       <HBox layoutX="239.0" layoutY="626.0">

@@ -10,7 +10,7 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String city;
-    private List<Purchase> purchases;
+    private List<Product> purchases;
 
     public int getCustomerId() {
         return customerId;
@@ -28,7 +28,7 @@ public class Customer {
         return city;
     }
 
-    public List<Purchase> getPurchases() {
+    public List<Product> getPurchases() {
         return purchases;
     }
 

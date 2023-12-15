@@ -1,5 +1,7 @@
 package com.example.comp1011200541827test2;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -7,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.List;
@@ -32,7 +35,7 @@ public class SaleViewController {
     private TableColumn<Customer, String> lastNameColumn;
 
     @FXML
-    private TableColumn<Customer, List<Purchase>> purchasesColumn;  // Corrected type
+    private TableColumn<Customer, List<Product>> purchasesColumn;  // Corrected type
 
     @FXML
     private Label retailPriceLabel;
@@ -44,7 +47,7 @@ public class SaleViewController {
     private Label savingsLabel;
 
     @FXML
-    private ListView<Purchase> listView;
+    private ListView<Product> listView;
 
     @FXML
     private TableView<Customer> tableView;
@@ -54,6 +57,7 @@ public class SaleViewController {
 
     @FXML
     void initialize() {
+        //Populating the table view with the customers from the json file
         Business business = JsonUtility.getBusinessFromFile("customers.json");
         if (business != null) {
             customers = business.getCustomers();
@@ -66,15 +70,48 @@ public class SaleViewController {
             updateLabels();
         }
 
-        tableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, studentSelected) ->
+
+        //Listener that will show the purchases made by the customer when the customer is selected
+        tableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, customerSelected) ->
         {
             listView.getItems().clear();
-            List<Purchase> courses = studentSelected.getPurchases();
+            List<Product> courses = customerSelected.getPurchases();
             listView.getItems().addAll(courses);
         });
 
 
+        //Updating the image view and labels when the product is selected from the list view
+        tableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, productSelected) -> {
+            listView.getItems().clear();
+            List<Product> products = productSelected.getPurchases();
+            listView.getItems().addAll(products);
+        });
+
+        listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedProduct) -> {
+            if (selectedProduct != null) {
+                // Update labels and imageView based on selectedProduct
+                updatePriceLabels(selectedProduct);
+                updateImageView(selectedProduct);
+            }
+        });
     }
+
+    private void updatePriceLabels(Product selectedProduct) {
+        retailPriceLabel.setText("MSRP: $" + selectedProduct.getRegularPrice());
+        salePriceLabel.setText("Sale Price: $" + selectedProduct.getSalePrice());
+        savingsLabel.setText("Savings: $" + (selectedProduct.getRegularPrice() - selectedProduct.getSalePrice()));
+    }
+
+    private void updateImageView(Product selectedProduct) {
+        //Loading image from the URL and set it to the imageView
+        Image image = new Image(selectedProduct.getImage());
+        imageView.setImage(image);
+    }
+
+
+
+
+
 
     private void updateLabels()
     {

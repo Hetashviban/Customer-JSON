@@ -2,7 +2,7 @@ package com.example.comp1011200541827test2;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Purchase {
+public class Product {
     @SerializedName("id")
     private int purchaseId;
     private String sku;

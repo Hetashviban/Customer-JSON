@@ -127,12 +127,14 @@ public class SaleViewController {
 
     @FXML
     void savedMoneyButton(ActionEvent event) {
-        List<Customer> savedCustomers = customers.stream()
-                .filter(customer -> customer.getSavings() >= 5.0)
-                .toList();
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            List<Customer> savedCustomers = customers.stream()
+                    .filter(customer -> customer.getSavings() >= 5.0)
+                    .toList();
 
-        tableView.getItems().clear();
-        tableView.getItems().addAll(savedCustomers);
-        updateLabels();
+            tableView.getItems().clear();
+            tableView.getItems().addAll(savedCustomers);
+            updateLabels();
+        }
     }
 }

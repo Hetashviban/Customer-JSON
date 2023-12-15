@@ -1,0 +1,15 @@
+.root{
+    -fx-background-color: grey;
+    -fx-font: bold italic 10pt "Arial";
+}
+
+VBox, HBox {
+    -fx-background-color: lightgrey;
+    -fx-padding: 10;
+}
+
+Button {
+    -fx-background-color: darkgrey;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}

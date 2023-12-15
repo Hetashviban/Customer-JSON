@@ -36,4 +36,13 @@ public class Customer {
         return String.format("Customer{id=%d, firstName='%s', lastName='%s', city='%s', purchases=%s}",
                 customerId, firstName, lastName, city, purchases);
     }
+
+    public double getPurchaseValue() {
+        if (purchases != null) {
+            return purchases.stream()
+                    .mapToDouble(purchase -> purchase.getSalePrice())
+                    .sum();
+        }
+        return 0.0; // or any default value you prefer if there are no purchases
+    }
 }

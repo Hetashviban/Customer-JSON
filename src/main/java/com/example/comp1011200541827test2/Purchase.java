@@ -36,6 +36,6 @@ public class Purchase {
     }
 
     public String toString() {
-        return String.format("%d sku: %s", purchaseId, sku);
+        return String.format("%d sku: %s, name: %s", purchaseId, sku, name);
     }
 }

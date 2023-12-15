@@ -65,6 +65,15 @@ public class SaleViewController {
             tableView.getItems().addAll(customers);
             updateLabels();
         }
+
+        tableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, studentSelected) ->
+        {
+            listView.getItems().clear();
+            List<Purchase> courses = studentSelected.getPurchases();
+            listView.getItems().addAll(courses);
+        });
+
+
     }
 
     private void updateLabels()

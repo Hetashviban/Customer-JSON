@@ -79,7 +79,7 @@ public class SaleViewController {
             }
         });
 
-        // Updating the image view and labels when the product is selected from the list view
+        //Updating the image view and labels when the product is selected from the list view
         tableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, productSelected) -> {
             if (productSelected != null) {
                 listView.getItems().clear();
@@ -90,7 +90,7 @@ public class SaleViewController {
 
         listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedProduct) -> {
             if (selectedProduct != null) {
-                // Update labels and imageView based on selectedProduct
+                //Updating labels and imageView based on selectedProduct
                 updatePriceLabels(selectedProduct);
                 updateImageView(selectedProduct);
             }
@@ -110,6 +110,7 @@ public class SaleViewController {
         imageView.setImage(image);
     }
 
+    //Updating the labels when the buttons are clicked
     private void updateLabels()
     {
         label.setText("Number of Customers: " + tableView.getItems().size());

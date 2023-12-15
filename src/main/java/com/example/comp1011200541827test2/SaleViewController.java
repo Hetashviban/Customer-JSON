@@ -63,7 +63,13 @@ public class SaleViewController {
             cityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
             purchasesColumn.setCellValueFactory(new PropertyValueFactory<>("formattedPurchaseValue"));
             tableView.getItems().addAll(customers);
+            updateLabels();
         }
+    }
+
+    private void updateLabels()
+    {
+        label.setText("Number of Customers: " + tableView.getItems().size());
     }
 
     @FXML
